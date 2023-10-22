@@ -79,7 +79,7 @@ public class TetrisPanel extends JPanel implements Runnable {
         bTheme = TinySound.loadMusic("sounds/themeB.wav");
         cTheme = TinySound.loadMusic("sounds/themeC.wav");
         aTheme.play(true);
-        TinySound.setGlobalVolume(0.6);
+        TinySound.setGlobalVolume(0.2);
 
         try {
             font = ImageIO.read(getClass().getResource("/graphics/font.png"));

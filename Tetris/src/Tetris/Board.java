@@ -61,8 +61,20 @@ public class Board extends JPanel implements ActionListener {
 
     public void keyPressed(KeyEvent e) {
 
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && isStarted == true) {
             pause();
+        }
+
+        // alteração feita para iniciar na letra I
+        if (e.getKeyCode() == KeyEvent.VK_I && isStarted == false){
+            start();
+        }
+        // aqui seria para o restart apertando na tecla R
+        if(e.getKeyCode() == KeyEvent.VK_R ) {
+            Frame.panel.lose = false;
+            clearBoard();
+            start();
+
         }
 
         if (isPaused) {

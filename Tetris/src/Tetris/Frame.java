@@ -3,6 +3,7 @@ package Tetris;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
@@ -37,7 +38,7 @@ public class Frame extends JFrame {
         final ControlsWindow cont = new ControlsWindow();
         JMenuBar menuBar;
         JMenu menu, sounds, music, volume, about;
-        JMenuItem menuItem, pauseItem, exitItem, controls, aboutItem;
+        JMenuItem menuItem, pauseItem, exitItem, controls, aboutItem, restart;
         final JRadioButtonMenuItem aTheme;
         final JRadioButtonMenuItem bTheme;
         final JRadioButtonMenuItem cTheme;
@@ -64,9 +65,10 @@ public class Frame extends JFrame {
 
         volume0 = new JRadioButtonMenuItem("0%");
         volume20 = new JRadioButtonMenuItem("20%");
+        volume20.setSelected(true);
         volume40 = new JRadioButtonMenuItem("40%");
         volume60 = new JRadioButtonMenuItem("60%");
-        volume60.setSelected(true);
+        //volume60.setSelected(true);
         volume80 = new JRadioButtonMenuItem("80%");
         volume100 = new JRadioButtonMenuItem("100%");
 
@@ -93,6 +95,9 @@ public class Frame extends JFrame {
         menuItem = new JMenuItem("New Game",
                 KeyEvent.VK_T);
         pauseItem = new JMenuItem("Pause Game",
+                KeyEvent.VK_T);
+        // implementar o botão de restart no menu
+        restart = new JMenuItem("Restart",
                 KeyEvent.VK_T);
         exitItem = new JMenuItem("Exit Game",
                 KeyEvent.VK_T);
@@ -196,14 +201,24 @@ public class Frame extends JFrame {
             if (cTheme.isSelected() == true) {
                 TetrisPanel.cTheme.play(true);
             }
-            panel.lose = false;
+
+            panel.lose = false; //// ############
             board.clearBoard();
             board.start();
+        });
+        // restart implementado no menu
+        restart.addActionListener((ActionEvent e) -> {
+            if(panel.lose == true){
+                panel.lose = false; //// ############
+                board.clearBoard();
+                board.start();
+            }
         });
 
         sounds.add(controls);
         menu.add(menuItem);
         menu.add(pauseItem);
+        menu.add(restart); // adicionado o botão no menu
         menu.addSeparator();
         menu.add(exitItem);
         about.add(aboutItem);
