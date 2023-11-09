@@ -3,9 +3,9 @@ package Tetris;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ControlsLogic {
+public class ControlsLogics {
     private ControlsWindow window;
-    public ControlsLogic(ControlsWindow window) {
+    public ControlsLogics(ControlsWindow window) {
         this.window = window;
 
             window.btnClose.addActionListener(new ActionListener() {
