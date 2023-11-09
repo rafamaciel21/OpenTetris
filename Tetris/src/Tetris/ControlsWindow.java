@@ -4,14 +4,14 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
+import javax.swing.*;
 
 public class ControlsWindow extends JFrame {
 
     public static Image icon;
+    public AbstractButton btnClose;
+    public AbstractButton btnApply;
+    public AbstractButton btnDefaults;
     private JFrame frame;
 
     /**
@@ -96,26 +96,6 @@ public class ControlsWindow extends JFrame {
         JButton btnClose = new JButton("Close");
         btnClose.setBounds(157, 234, 89, 23);
         getContentPane().add(btnClose);
-
-        btnClose.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
-
-        btnApply.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
-
-        btnDefaults.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+        
     }
 }
