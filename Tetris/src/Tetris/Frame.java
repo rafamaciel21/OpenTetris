@@ -207,17 +207,11 @@ public class Frame extends JFrame {
             board.start();
         });
         // restart implementado no menu
-//        restart.addActionListener((ActionEvent e) -> {
-//            if(panel.lose == true){
-//                panel.lose = false; //// ############
-//                board.clearBoard();
-//                board.start();
-//            }
-//        });
-
         restart.addActionListener((ActionEvent e) -> {
-            if(panel.lose){
-                board.restartGame();
+            if(panel.lose == true){
+                panel.lose = false; //// ############
+                board.clearBoard();
+                board.start();
             }
         });
 
