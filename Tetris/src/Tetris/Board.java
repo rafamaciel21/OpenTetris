@@ -75,7 +75,6 @@ public class Board extends JPanel implements ActionListener {
         // aqui seria para o restart apertando na tecla R
         if(e.getKeyCode() == KeyEvent.VK_R ) {
             restartGame();
-
         }
 
         if (isPaused) {

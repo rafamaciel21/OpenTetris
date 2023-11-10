@@ -214,7 +214,7 @@ public class Frame extends JFrame {
 //                board.start();
 //            }
 //        });
-
+//adicionado aqui
         restart.addActionListener((ActionEvent e) -> {
             if(panel.lose == true){
                 board.restartGame();
