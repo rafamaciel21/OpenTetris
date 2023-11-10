@@ -44,8 +44,8 @@ public class Frame extends JFrame {
         final JRadioButtonMenuItem cTheme;
 
         JCheckBoxMenuItem snd, msc;
-        //testeasdasd
-        menuBar = new JMenuBar();
+        //testeasdasdasd
+        menuBar = new JMenuBsar();
         menu = new JMenu("Game");
         sounds = new JMenu("Options");
         music = new JMenu("Music");
