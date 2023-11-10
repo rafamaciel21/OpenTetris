@@ -41,11 +41,14 @@ public class Board extends JPanel implements ActionListener {
         nextPiece = new Shape();
         timer = new Timer(400, this);
         Boolean usePrefix = true;
-        String prefix = "";
-        if (usePrefix) {
-            String s = System.getProperty("user.dir");
-            prefix = s + "/Tetris/";
-        }
+//        String prefix = "";
+//        if (usePrefix) {
+//            String s = System.getProperty("user.dir");
+//            prefix = s + "/Tetris/";
+//        }
+
+        String s = System.getProperty("user.dir");
+        String prefix = s + "/Tetris/";
 
         box[1] = new ImageIcon(prefix + "graphics/pieces/1boxP1.png").getImage();
         box[2] = new ImageIcon(prefix + "graphics/pieces/2box.png").getImage();
@@ -71,9 +74,7 @@ public class Board extends JPanel implements ActionListener {
         }
         // aqui seria para o restart apertando na tecla R
         if(e.getKeyCode() == KeyEvent.VK_R ) {
-            Frame.panel.lose = false;
-            clearBoard();
-            start();
+            restartGame();
 
         }
 
@@ -102,6 +103,13 @@ public class Board extends JPanel implements ActionListener {
             TetrisPanel.move.play();
             oneLineDown();
         }
+    }
+
+    // restart implamentado no metodo
+    public void restartGame(){
+        Frame.panel.lose = false;
+        clearBoard();
+        start();
     }
 
     @Override
