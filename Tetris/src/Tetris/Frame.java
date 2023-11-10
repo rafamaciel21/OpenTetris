@@ -44,7 +44,7 @@ public class Frame extends JFrame {
         final JRadioButtonMenuItem cTheme;
 
         JCheckBoxMenuItem snd, msc;
-
+        //asd
         menuBar = new JMenuBar();
         menu = new JMenu("Game");
         sounds = new JMenu("Options");
@@ -65,7 +65,7 @@ public class Frame extends JFrame {
 
         volume0 = new JRadioButtonMenuItem("0%");
         volume20 = new JRadioButtonMenuItem("20%");
-        volume20.setSelected(true);
+        volume0.setSelected(true);
         volume40 = new JRadioButtonMenuItem("40%");
         volume60 = new JRadioButtonMenuItem("60%");
         //volume60.setSelected(true);
@@ -227,13 +227,19 @@ public class Frame extends JFrame {
         setLayout(null);
         setIconImage(icon);
         setFocusable(true);
+
+        //DIMENSOES DA TELA
         setSize(new Dimension(800, 770));
         setTitle("Tetris");
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        //PANEL PARTE VISUAL QUE FICA DENTRO DA TELA
         panel.init(this);
         add(panel);
         panel.setBounds(0, 0, 800, 770);
+
+        //BOARD É O MENU DE OPCOES QUE FICA SUSPENSO
         add(board);
         board.setBounds(0, 50, 400, 720);
         setLocationRelativeTo(null);
