@@ -142,7 +142,7 @@ public class TetrisPanel extends JPanel implements Runnable {
                 } else {
                     Frame.board.timer.start();
                 }
-                pause = !pause;
+                pause =  !pause;
             }
         }
 
