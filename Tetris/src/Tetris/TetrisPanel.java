@@ -137,7 +137,7 @@ public class TetrisPanel extends JPanel implements Runnable {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
             if (!lose) {
-                if (!pause) {
+                if (pause == false) {
                     Frame.board.timer.stop();
                 } else {
                     Frame.board.timer.start();
@@ -195,7 +195,7 @@ public class TetrisPanel extends JPanel implements Runnable {
         if (!lose && !pause && !Frame.board.isStarted) {
             g.drawImage(we, 75, 0, 400, 720, null);
         }
-
+        
         paintPiece(g, box[1], Tetrominoes.LineShape);
         paintPiece(g, box[2], Tetrominoes.MirroredLShape);
         paintPiece(g, box[3], Tetrominoes.LShape);

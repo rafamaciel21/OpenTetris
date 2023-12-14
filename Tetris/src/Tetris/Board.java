@@ -41,7 +41,6 @@ public class Board extends JPanel implements ActionListener {
         nextPiece = new Shape();
         timer = new Timer(400, this);
         Boolean usePrefix = true;
-
 //        String prefix = "";
 //        if (usePrefix) {
 //            String s = System.getProperty("user.dir");
@@ -51,10 +50,13 @@ public class Board extends JPanel implements ActionListener {
         String s = System.getProperty("user.dir");
         String prefix = s + "/Tetris/";
 
-    //Essa alteração ajuda a diminuir o código e criar uma melhor visualização do código
-        for (int i = 1; i < box.length; i++) {
-            box[i] = new ImageIcon(prefix + "graphics/pieces/" + i + "box.png").getImage();
-        }
+        box[1] = new ImageIcon(prefix + "graphics/pieces/1boxP1.png").getImage();
+        box[2] = new ImageIcon(prefix + "graphics/pieces/2box.png").getImage();
+        box[3] = new ImageIcon(prefix + "graphics/pieces/3box.png").getImage();
+        box[4] = new ImageIcon(prefix + "graphics/pieces/4box.png").getImage();
+        box[5] = new ImageIcon(prefix + "graphics/pieces/5box.png").getImage();
+        box[6] = new ImageIcon(prefix + "graphics/pieces/6box.png").getImage();
+        box[7] = new ImageIcon(prefix + "graphics/pieces/7box.png").getImage();
 
         board = new Tetrominoes[BoardWidth * BoardHeight];
         clearBoard();
@@ -62,12 +64,12 @@ public class Board extends JPanel implements ActionListener {
 
     public void keyPressed(KeyEvent e) {
 
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && isStarted) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && isStarted == true) {
             pause();
         }
 
         // alteração feita para iniciar na letra I
-        if (e.getKeyCode() == KeyEvent.VK_I && !isStarted){
+        if (e.getKeyCode() == KeyEvent.VK_I && isStarted == false){
             start();
         }
         // aqui seria para o restart apertando na tecla R
@@ -162,9 +164,11 @@ public class Board extends JPanel implements ActionListener {
         }
 
         isPaused = !isPaused;
-        if (!isPaused) {
+        if (isPaused) {
+
+        } else {
             timer.start();
-//            statusbar.setText(String.valueOf(numLinesRemoved));
+            statusbar.setText(String.valueOf(numLinesRemoved));
         }
 
     }
