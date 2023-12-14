@@ -3,7 +3,6 @@ package Tetris;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
@@ -13,25 +12,15 @@ import kuusisto.tinysound.TinySound;
 
 public class Frame extends JFrame {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     public static TetrisPanel panel = new TetrisPanel();
     public static Image icon;
     public static Board board = new Board();
 
-    final JRadioButtonMenuItem volume0;
-    final JRadioButtonMenuItem volume20;
-    final JRadioButtonMenuItem volume40;
-    final JRadioButtonMenuItem volume60;
-    final JRadioButtonMenuItem volume80;
-    final JRadioButtonMenuItem volume100;
-
     public Frame() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ignored) {
         }
 
         icon = new ImageIcon("graphics/pieces/6.png").getImage();
@@ -44,7 +33,7 @@ public class Frame extends JFrame {
         final JRadioButtonMenuItem cTheme;
 
         JCheckBoxMenuItem snd, msc;
-        //asd
+
         menuBar = new JMenuBar();
         menu = new JMenu("Game");
         sounds = new JMenu("Options");
@@ -63,25 +52,10 @@ public class Frame extends JFrame {
         bTheme = new JRadioButtonMenuItem("B Theme");
         cTheme = new JRadioButtonMenuItem("C Theme");
 
-        volume0 = new JRadioButtonMenuItem("0%");
-        volume20 = new JRadioButtonMenuItem("20%");
-        volume0.setSelected(true);
-        volume40 = new JRadioButtonMenuItem("40%");
-        volume60 = new JRadioButtonMenuItem("60%");
-        //volume60.setSelected(true);
-        volume80 = new JRadioButtonMenuItem("80%");
-        volume100 = new JRadioButtonMenuItem("100%");
-
         music.add(aTheme);
         music.add(bTheme);
         music.add(cTheme);
 
-        volume.add(volume0);
-        volume.add(volume20);
-        volume.add(volume40);
-        volume.add(volume60);
-        volume.add(volume80);
-        volume.add(volume100);
 
         snd = new JCheckBoxMenuItem("Sounds");
         snd.setSelected(true);
@@ -96,9 +70,11 @@ public class Frame extends JFrame {
                 KeyEvent.VK_T);
         pauseItem = new JMenuItem("Pause Game",
                 KeyEvent.VK_T);
-        // implementar o botão de restart no menu
+
+        // Implementado o botão de restart no menu
         restart = new JMenuItem("Restart",
                 KeyEvent.VK_T);
+
         exitItem = new JMenuItem("Exit Game",
                 KeyEvent.VK_T);
         controls = new JMenuItem("Controls...",
@@ -146,40 +122,26 @@ public class Frame extends JFrame {
             System.exit(1);
         });
 
-        volume0.addActionListener((ActionEvent e) -> {
-            setVolumeFromMenu(0);
-            volume0.setSelected(true);
-        });
+        //Funcionalidade que determina o volume do jogo
+        String[] volumeOptions = {"0%", "20%", "40%", "60%", "80%", "100%"};
+        JMenuItem[] volumeMenuItems = new JMenuItem[volumeOptions.length];
 
-        volume20.addActionListener((ActionEvent e) -> {
-            setVolumeFromMenu(0.2);
-            volume20.setSelected(true);
-        });
+        for (int i = 0; i < volumeOptions.length; i++) {
+            volumeMenuItems[i] = new JMenuItem(volumeOptions[i]);
+            int finalI = i;
+            volumeMenuItems[i].addActionListener(e -> {
+                double volumeLevel = Double.parseDouble(e.getActionCommand().replace("%", "")) / 100.0;
+                setVolumeFromMenu(volumeLevel);
+                volumeMenuItems[finalI].setSelected(true);
+            });
 
-        volume40.addActionListener((ActionEvent e) -> {            
-            setVolumeFromMenu(0.4);
-            volume40.setSelected(true);
-        });
-
-        volume60.addActionListener((ActionEvent e) -> {
-            setVolumeFromMenu(0.6);
-            volume60.setSelected(true);
-        });
-
-        volume80.addActionListener((ActionEvent e) -> {
-            setVolumeFromMenu(0.8);
-            volume80.setSelected(true);
-        });
-
-        volume100.addActionListener((ActionEvent e) -> {
-            setVolumeFromMenu(1.0);
-            volume100.setSelected(true);
-        });
+            volume.add(volumeMenuItems[i]);
+        }
 
         pauseItem.addActionListener((ActionEvent e) -> {
             TetrisPanel.turn.play();
             if (!panel.lose) {
-                if (false == TetrisPanel.pause) {
+                if (!TetrisPanel.pause) {
                     TetrisPanel.pause = true;
                     board.timer.stop();
                 } else {
@@ -192,13 +154,13 @@ public class Frame extends JFrame {
         menuItem.addActionListener((ActionEvent e) -> {
             TetrisPanel.turn.play();
 
-            if (aTheme.isSelected() == true) {
+            if (aTheme.isSelected()) {
                 TetrisPanel.aTheme.play(true);
             }
-            if (bTheme.isSelected() == true) {
+            if (bTheme.isSelected()) {
                 TetrisPanel.bTheme.play(true);
             }
-            if (cTheme.isSelected() == true) {
+            if (cTheme.isSelected()) {
                 TetrisPanel.cTheme.play(true);
             }
 
@@ -206,17 +168,9 @@ public class Frame extends JFrame {
             board.clearBoard();
             board.start();
         });
-        // restart implementado no menu
-//        restart.addActionListener((ActionEvent e) -> {
-//            if(panel.lose == true){
-//                panel.lose = false; //// ############
-//                board.clearBoard();
-//                board.start();
-//            }
-//        });
-//adicionado aqui
+
         restart.addActionListener((ActionEvent e) -> {
-            if(panel.lose == true){
+            if(panel.lose){
                 board.restartGame();
             }
         });
@@ -275,12 +229,6 @@ public class Frame extends JFrame {
     }
 
     public void setVolumeFromMenu(double val) {
-        volume40.setSelected(false);
-        volume60.setSelected(false);
-        volume80.setSelected(false);
-        volume20.setSelected(false);
-        volume100.setSelected(false);
-        volume0.setSelected(false);
         TinySound.setGlobalVolume(val);
     }
 
