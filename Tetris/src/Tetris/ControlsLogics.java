@@ -1,32 +1,15 @@
 package Tetris;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class ControlsLogics {
-    private ControlsWindow window;
     public ControlsLogics(ControlsWindow window) {
-        this.window = window;
+        //Nesta classe onde existe a lógica dos botões foi possível usar funções lambdas tornando  mais legível.
 
-            window.btnClose.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                        window.setVisible(false);
-                }
-            });
+        window.btnClose.addActionListener(e -> window.setVisible(false));
 
-        window.btnApply.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                window.setVisible(false);
-            }
-        });
+        window.btnApply.addActionListener(e -> window.setVisible(false));
 
-        window.btnDefaults.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        window.btnDefaults.addActionListener(e -> {
 
-            }
         });
     }
 }
